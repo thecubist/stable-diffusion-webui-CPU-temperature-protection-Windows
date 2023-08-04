@@ -58,4 +58,4 @@ Settings can be found at `Setting` > `CPU Temperature`
 
 ## Notes
 - Temperature unit Celsius, Time unit seconds
-- To be honest I don't recommend anyone using this extension, if your CPU is having temperature issues and don't have the means to improve the cooling, then recommend using software like MSI afterburner to undervolt or further power limit or thermal limit the CPU.
+- Be advised, repeatedly lowering and raising the temperature of a CPU in quick succession can in some situations lower the lifespan of the CPU. This extension is not a replacement for effective CPU cooling and should be used with caution
