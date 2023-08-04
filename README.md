@@ -17,6 +17,8 @@ Install using extensions tab `Install from URL` by manually copying the reposito
 ```
 https://github.com/thecubist/stable-diffusion-webui-CPU-temperature-protection-Windows.git
 ```
+![image](https://github.com/thecubist/stable-diffusion-webui-CPU-temperature-protection-Windows/assets/36249159/c77838ba-eee6-42d6-9a06-ba5d03d6bf38)
+
 # writing beyond this point is from the original repository and will be updated once extension is updated
 ## Setting
 Settings can be found at `Setting` > `GPU Temperature`
