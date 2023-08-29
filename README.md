@@ -1,7 +1,7 @@
 # CPU temperature protection
 ### Original CPU Temp Protection Repository
 This extension was forked from w-e-w's CPU Temperature Protection extension which can be found here 
-https://github.com/w-e-w/stable-diffusion-webui-CPU-temperature-protection 
+https://github.com/w-e-w/stable-diffusion-webui-GPU-temperature-protection 
 
 ### Disclaimer
 This repository is currently in development and may be unstable or non functional for many users. The project has only been tested on a machine equiped with an Intel CPU. 
