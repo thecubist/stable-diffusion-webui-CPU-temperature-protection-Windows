@@ -1,10 +1,17 @@
 import gradio as gr
-
 import time
-import wmi #Importing WMI as psutil doesn't appear to support windows
 import pythoncom
 from modules.sd_samplers_kdiffusion import KDiffusionSampler
-from modules import scripts, shared       
+from modules import scripts, shared
+import launch
+import sys 
+# OS specific imports
+try:
+    import wmi #WMI used for windows support
+except Exception as e:
+    if sys.platform.startswith('win'):
+        print("CPU Temp Error: WMI not found on Windows platform, please restart SD to auto install WMI")
+
 #settings for the UI
 shared.options_templates.update(shared.options_section(('CPU_temperature_protection', "CPU Temperature"), {
     "cpu_temps_sleep_enable": shared.OptionInfo(True, "Enable CPU temperature protection"),
@@ -15,7 +22,7 @@ shared.options_templates.update(shared.options_section(('CPU_temperature_protect
     "cpu_temps_sleep_sleep_temp": shared.OptionInfo(75.0, "CPU sleep temperature", gr.Slider, {"minimum": 0, "maximum": 125}).info("generation will pause if CPU core temperature exceeds this temperature"),
     "cpu_temps_sleep_wake_temp": shared.OptionInfo(75.0, "CPU wake temperature", gr.Slider, {"minimum": 0, "maximum": 125}).info("generation will pause until CPU core temperature drops below this temperature"),
 }))
-
+    
 class CPUTemperatureProtection(scripts.Script):
     def title(self):
         return "CPU temperature protection"
@@ -28,7 +35,9 @@ class CPUTemperatureProtection(scripts.Script):
             setattr(KDiffusionSampler, "callback_state", CPUTemperatureProtection.cpu_temperature_protection_decorator(KDiffusionSampler.callback_state))
 
     def get_cpu_package_temperature():
+    # ----------------------- windows mode --------------------------
         try: #catch errors caused by WMI or OHM not running
+            
             pythoncom.CoInitialize()  # Start thread
             temperature_infos = wmi.WMI(namespace="root\\OpenHardwareMonitor").Sensor()  # Holds all temperature info
             for sensor in temperature_infos: #search for CPU package sensor
@@ -38,6 +47,7 @@ class CPUTemperatureProtection(scripts.Script):
             print(f'[Error getting CPU package temperature]: {e}') # add different prints based on commonly thrown errors
         finally:
             pythoncom.CoUninitialize()  # Close thread
+    # ---------------------------------------------------------------
         return 0
 
     @staticmethod
