@@ -16,7 +16,7 @@ this extension uses nvidia-smi to monitor CPU temperature at the end of each ste
 Open Hardware Monitor (OHM) is used to access the temperature sensors for the CPU and must be running in the background for this extension to function. You can get Open Hardware Monitor from 
 https://openhardwaremonitor.org/
 ### WMI
-The WMI is used to access information within OHM and must be installed in the stable diffusion virtual environment in order to function. This extension does not currently support auto installing this dependency and therefor must be installed manually by navigating to the stable diffusion folder and running the commands
+The WMI is used to access information within OHM and must be installed in the stable diffusion virtual environment in order to function. This extension supports auto installing WMI. If WMI does not auto install you can manually install this dependency by navigating to the stable diffusion folder and running the commands
 ```
 venv/scripts/activate
 ```
